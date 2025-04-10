@@ -3,3 +3,28 @@ title: "Proposal"
 ---
 
 Your proposal will go here.
+
+*Title*
+
+*Members:* Ataa, Kellen Sedlemeyer, Danniel Powell
+
+*Description*
+:::
+Exploring the tariffs Trump has placed on different countries, there affects on those countries and ours currently as well as how this may affect different countries later on.
+:::
+
+*Reason*
+:::
+This is topical. It is something that is currently impacting our world and having more information on this topic will help us better understand America's economy, the world economy and the interconnection between America and the rest of the world.
+:::
+
+*Plan*
+:::
+- Import data
+- Wrangle tables
+- Join tables
+- Create Questions
+- Create plots answering questions
+- Answer Main question
+- Create report
+:::
