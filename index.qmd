@@ -11,3 +11,10 @@ Your report will go here.
 # this is a test code
 ```
 
+```{r}
+library(tidyverse)
+library(here)
+read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
+read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
+```
+
