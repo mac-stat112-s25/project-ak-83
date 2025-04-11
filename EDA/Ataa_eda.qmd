@@ -1,0 +1,19 @@
+---
+title: "Ataa_eda"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(here)
+read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
+read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
+```
+
+
+```{r}
+#Load in summary/eda package (check slideshow) & use function
+```
+
+
+
