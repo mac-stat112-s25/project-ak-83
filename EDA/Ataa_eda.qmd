@@ -6,14 +6,22 @@ format: html
 ```{r}
 library(tidyverse)
 library(here)
-read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
-read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
+Tariff_est_impact <- read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
+Tariff_rev_impact <-read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
 ```
 
 
 ```{r}
 #Load in summary/eda package (check slideshow) & use function
+library(arsenal)
+
+Tariff_est_impact |>
+  summary()
 ```
 
+```{r}
+Tariff_rev_impact |>
+  summary()
+```
 
 
