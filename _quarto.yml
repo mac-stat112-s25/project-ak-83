@@ -41,7 +41,8 @@ book:
   appendices:
   - src/appx/proposal.qmd
   - src/appx/case-study.qmd
-  - src/appx/Ataa_M.qmd
+  - src/appx/et/Ataa-M.qmd
+  - src/appx/et/kellen-s.qmd
 
 
 

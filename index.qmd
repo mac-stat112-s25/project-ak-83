@@ -14,7 +14,20 @@ Your report will go here.
 ```{r}
 library(tidyverse)
 library(here)
-read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
-read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
+Estimated_tariff_impact <- read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
+Revenue_effects <- read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
+```
+
+```{r}
+Estimated_tariff_impact <- Estimated_tariff_impact |>
+  mutate(country = ...1) |>
+  select(country, GDP, `Capital Stock`, `Pre-Tax Wages`,`Hours Worked Converted to Full-Time Equivalent Jobs`, )
+```
+
+```{r}
+Revenue_effects |>
+  mutate(country = `Conventional Revenue`) |>
+  select(-`Conventional Revenue`) |>
+  relocate(country, .before = `2025`)
 ```
 
