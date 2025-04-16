@@ -11,6 +11,8 @@ Your report will go here.
 # this is a test code
 ```
 
+We will be exploring some different tariffs president Trump has placed on the countries and items and trying to answer the large question: What is the effect of Trump's tariffs on the world and on the country?
+
 ```{r}
 library(tidyverse)
 library(here)
@@ -20,14 +22,53 @@ Revenue_effects <- read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
 
 ```{r}
 Estimated_tariff_impact <- Estimated_tariff_impact |>
-  mutate(country = ...1) |>
-  select(country, GDP, `Capital Stock`, `Pre-Tax Wages`,`Hours Worked Converted to Full-Time Equivalent Jobs`, )
+  mutate(tariff = country) |>
+  select(tariff, GDP, `Capital Stock`, `Pre-Tax Wages`,`Hours Worked Converted to Full-Time Equivalent Jobs`)
 ```
 
 ```{r}
-Revenue_effects |>
-  mutate(country = `Conventional Revenue`) |>
+Revenue_effects <- Revenue_effects |>
+  mutate(tariff = `Conventional Revenue`) |>
   select(-`Conventional Revenue`) |>
-  relocate(country, .before = `2025`)
+  relocate(tariff, .before = `2025`)
 ```
+
+```{r}
+Estimated_tariff_impact |>
+  head()
+Revenue_effects |>
+  head()
+```
+
+What countries GDP has/will been most effected by the tariffs
+
+```{r}
+#Change the data types from characters to numerical
+ggplot(Estimated_tariff_impact, aes(x = GDP, color = tariff)) +
+  geom_bar()
+```
+
+```{r}
+Estimated_tariff_impact <- Estimated_tariff_impact |>
+  filter(!is.na(tariff))
+```
+
+```{r}
+Revenue_effects <- Revenue_effects |>
+  filter(!is.na(tariff)) |>
+  filter(tariff != "Dynamic Revenue")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
