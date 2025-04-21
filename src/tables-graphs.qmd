@@ -1,0 +1,69 @@
+---
+title: "tables-graphs"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(here)
+Estimated_tariff_impact <- read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
+Revenue_effects <- read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
+```
+
+```{r}
+Estimated_tariff_impact <- Estimated_tariff_impact |>
+  #mutate(tariff = ...1) |>
+  select(tariff, GDP, `Capital Stock`, `Pre-Tax Wages`,`Hours Worked Converted to Full-Time Equivalent Jobs`) |>
+  filter(!is.na(tariff)) |>
+  mutate(GDP = as.numeric(GDP))
+head(Estimated_tariff_impact)
+```
+
+```{r}
+Revenue_effects <- Revenue_effects |>
+  mutate(tariff = `Conventional Revenue`) |>
+  select(-`Conventional Revenue`) |>
+  relocate(tariff, .before = `2025`) |>
+  filter(!is.na(tariff)) |>
+  filter(tariff != "Dynamic Revenue")
+```
+
+```{r}
+Estimated_tariff_impact |>
+  head()
+Revenue_effects |>
+  head()
+```
+
+
+
+What countries GDP has/will been most effected by the tariffs
+
+```{r}
+Rev_effects_long <-Revenue_effects |>
+  pivot_longer(cols = c(2:12), names_to = "year", values_to = "est. revenue effect (in billions)")
+```
+
+```{r}
+Rev_effects_long |>
+  mutate(sign = str_sub(`est. revenue effect (in billions)`, 2,10)) |>
+  mutate(num = str_sub(`est. revenue effect (in billions)`,-1))
+  #separate(`est. revenue effect (in billions)`, c("Sign", "Num"))
+  # mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`))
+```
+
+
+```{r}
+Rev_effects_long |>
+  filter(year == "2025-2034") |>
+  ggplot(aes(x = `est. revenue effect (in billions)`, fill = tariff)) +
+  geom_bar()
+```
+
+
+
+```{r}
+#Change the data types from characters to numerical
+ggplot(Estimated_tariff_impact, aes(x = GDP, fill = tariff)) +
+  geom_bar()
+```
