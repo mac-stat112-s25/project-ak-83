@@ -38,15 +38,6 @@ Revenue_effects <- Revenue_effects |>
   filter(tariff != "Dynamic Revenue")
 ```
 
-```{r}
-Estimated_tariff_impact |>
-  head()
-Revenue_effects |>
-  head()
-```
-
-
-
 What countries GDP has/will been most effected by the tariffs
 
 ```{r}
@@ -62,19 +53,13 @@ Rev_effects_long <- Rev_effects_long |>
   mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`))
 ```
 
-
-```{r}
-Rev_effects_long |>
-  filter(year == "2025-2034") |>
-  ggplot(aes(x = `est. revenue effect (in billions)`, fill = tariff)) +
-  geom_bar()
-```
-
 ```{r}
 Rev_effects_long <- Rev_effects_long |>
   filter(year != "2025-2034") |>
   mutate(year = as.numeric(year))
 ```
+
+Visualization of Revenue Effects
 
 ```{r}
 Rev_effects_long |>
@@ -82,10 +67,25 @@ Rev_effects_long |>
   geom_line()
 ```
 
+Visualization of GDP decrease of different tariffs
 
 ```{r}
-#Change the data types from characters to numerical
-ggplot(Estimated_tariff_impact, aes(x = GDP, fill = tariff)) +
-  geom_bar()
+ggplot(est_tariff_impact, aes(x = GDP_dec, fill = tariff)) +
+  geom_histogram()
+# Clean up this graph
+```
+
+Visualization of Capital Stock decrease of different tariffs
+
+```{r}
+ggplot(est_tariff_impact, aes(x = Capital_stock_dec, fill = tariff)) +
+  geom_histogram()
+```
+
+Correlation of GDP and capital stock decrease of different tariffs 
+
+```{r}
+ggplot(est_tariff_impact, aes(x = GDP_dec, y = Capital_stock_dec, color = tariff)) +
+  geom_point()
 ```
 
