@@ -3,3 +3,37 @@ title: "KellenSedlmayerExplore"
 format: html
 ---
 
+```{r}
+births_data <- read.csv("C:/STAT112/project-ak-83/data/us_births_2016_2021.csv")
+head(births_data)
+```
+
+> 
+
+```{r}
+library(ggplot2)
+ggplot(births_data, aes(x = Number.of.Births, y = State)) +
+  geom_point()
+```
+
+
+```{r}
+ggplot(births_data, aes(x = Education.Level.Code, y = Average.Age.of.Mother..years., color = Education.Level.Code)) +
+  geom_jitter(width = 0.2, alpha = 0.6) +  # Slight jitter, some transparency
+  geom_smooth(method = "lm", se = FALSE, aes(group = Education.Level.Code), linetype = "dashed") +  # Trend lines per group
+  labs(
+    title = "Average Age of Mothers by Education Level",
+    x = "Education Level Code",
+    y = "Average Age of Mother (years)",
+    color = "Education Level"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+
+
+
