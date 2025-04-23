@@ -41,8 +41,13 @@ book:
   appendices:
   - src/appx/proposal.qmd
   - src/appx/case-study.qmd
+<<<<<<< Updated upstream
   - src/appx/et/Ataa-M.qmd
   - src/appx/et/kellen-s.qmd
+=======
+  - src/appx/Ataa_M.qmd
+  - src/appx/Sedlmayer_K.qmd
+>>>>>>> Stashed changes
 
 
 
