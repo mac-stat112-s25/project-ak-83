@@ -1,0 +1,32 @@
+---
+title: "birth_tables"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(here)
+us_births <- read_csv(here("data", "us_births_2016_2021.csv"))
+```
+```{r}
+head(us_births, 12)
+summary(us_births)
+```
+
+Focus on Minnesota, what are the trends of people having kids over this time span and how does that differ by education level.
+
+```{r}
+us_births |>
+  filter(State == "Minnesota") |>
+  ggplot(aes(x = Year, y = `Number of Births`, color = `Education Level of Mother`)) +
+    geom_line()
+```
+
+Trends for all education levels are very similar. Women with Bachelor's degrees are having by far the most children, is that due to something about people with bachelor's degrees having more babies ore are 
+
+
+
+
+
+
+

@@ -12,10 +12,10 @@ Revenue_effects <- read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
 
 ```{r}
 Estimated_tariff_impact <- Estimated_tariff_impact |>
-  #mutate(tariff = ...1) |>
+ # mutate(tariff = ...1) |>
   select(tariff, GDP, `Capital Stock`, `Pre-Tax Wages`,`Hours Worked Converted to Full-Time Equivalent Jobs`) |>
-  filter(!is.na(tariff)) |>
-  mutate(GDP = as.numeric(GDP))
+  filter(!is.na(tariff)) 
+  #mutate(GDP = as.numeric(GDP))
 head(Estimated_tariff_impact)
 ```
 
@@ -45,11 +45,11 @@ Rev_effects_long <-Revenue_effects |>
 ```
 
 ```{r}
-Rev_effects_long |>
-  mutate(sign = str_sub(`est. revenue effect (in billions)`, 2,10)) |>
-  mutate(num = str_sub(`est. revenue effect (in billions)`,-1))
+Rev_effects_long <- Rev_effects_long |>
+  mutate(`est. revenue effect (in billions)` = str_sub(`est. revenue effect (in billions)`, 2,10)) |>
+  #mutate(num = str_sub(`est. revenue effect (in billions)`,-1))
   #separate(`est. revenue effect (in billions)`, c("Sign", "Num"))
-  # mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`))
+  mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`))
 ```
 
 
@@ -60,6 +60,17 @@ Rev_effects_long |>
   geom_bar()
 ```
 
+```{r}
+Rev_effects_long <- Rev_effects_long |>
+  filter(year != "2025-2034") |>
+  mutate(year = as.numeric(year))
+```
+
+```{r}
+Rev_effects_long |>
+  ggplot(aes(x=year, y =`est. revenue effect (in billions)`, color = tariff)) +
+  geom_line()
+```
 
 
 ```{r}
@@ -67,3 +78,4 @@ Rev_effects_long |>
 ggplot(Estimated_tariff_impact, aes(x = GDP, fill = tariff)) +
   geom_bar()
 ```
+
