@@ -20,11 +20,11 @@ This is topical. It is something that is currently impacting our world and havin
 
 *Plan*
 
-- Import data
-- Wrangle tables
-- Join tables
-- Create Questions
-- Create plots answering questions
-- Answer Main question
-- Create report
+- Import data - Ataa
+- Wrangle tables - Ataa
+- Join tables - Ataa
+- Create Questions - Kellen, Daniel
+- Create plots answering questions - All
+- Answer Main question - All
+- Create report - All
 

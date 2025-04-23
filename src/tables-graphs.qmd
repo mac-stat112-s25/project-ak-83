@@ -11,13 +11,23 @@ Revenue_effects <- read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
 ```
 
 ```{r}
-Estimated_tariff_impact <- Estimated_tariff_impact |>
- # mutate(tariff = ...1) |>
+est_tariff_impact <- Estimated_tariff_impact |>
+  mutate(tariff = ...1) |>
   select(tariff, GDP, `Capital Stock`, `Pre-Tax Wages`,`Hours Worked Converted to Full-Time Equivalent Jobs`) |>
-  filter(!is.na(tariff)) 
-  #mutate(GDP = as.numeric(GDP))
-head(Estimated_tariff_impact)
+  filter(!is.na(tariff)) |>
+  mutate(GDP = str_sub(GDP,3,5)) |>
+  mutate(GDP = str_replace(GDP, "ss", ".05")) |>
+  mutate(GDP = as.numeric(GDP)) |>
+  mutate(`Capital Stock` = str_sub(`Capital Stock`,3,5)) |>
+  mutate(`Capital Stock` = str_replace(`Capital Stock`,"ss",".05")) |>
+  mutate(`Capital Stock` = as.numeric(`Capital Stock`)) |>
+  mutate("GDP_dec" = GDP) |>
+  mutate("Capital_stock_dec" = `Capital Stock`) |>
+  select(tariff, GDP_dec, Capital_stock_dec)
+head(est_tariff_impact)
 ```
+
+Capital Stock: Capital stock refers to the total number of shares that a company is authorized to issue, as outlined in its corporate charter. It represents the maximum amount of shares the company can ever have outstanding (That can be held by investors). 
 
 ```{r}
 Revenue_effects <- Revenue_effects |>
