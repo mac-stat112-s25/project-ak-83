@@ -50,7 +50,7 @@ Rev_effects_long <- Rev_effects_long |>
   mutate(`est. revenue effect (in billions)` = str_sub(`est. revenue effect (in billions)`, 2,10)) |>
   #mutate(num = str_sub(`est. revenue effect (in billions)`,-1))
   #separate(`est. revenue effect (in billions)`, c("Sign", "Num"))
-  mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`))
+  mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`)) 
 ```
 
 ```{r}
@@ -64,8 +64,15 @@ Visualization of Revenue Effects
 ```{r}
 Rev_effects_long |>
   ggplot(aes(x=year, y =`est. revenue effect (in billions)`, color = tariff)) +
-  geom_line()
+  geom_line() +
+  labs(x = "Year", y = "Estimated Revenue effect (in billions)")
 ```
+
+Consider here creating another rev effects graph
+```{r}
+
+```
+
 
 Visualization of GDP decrease of different tariffs
 
@@ -86,6 +93,10 @@ Correlation of GDP and capital stock decrease of different tariffs
 
 ```{r}
 ggplot(est_tariff_impact, aes(x = GDP_dec, y = Capital_stock_dec, color = tariff)) +
-  geom_point()
+  geom_point() +
+  labs(x = "Percent GDP decrease", y = "Percent Capital Stock dec.")
+
+# Figure out how to make the points bigger if at all possible
+# Try and reason which tariffs are missing and why that is (if it matters) explain why or why not
 ```
 
