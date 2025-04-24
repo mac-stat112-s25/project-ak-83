@@ -65,7 +65,7 @@ Visualization of Revenue Effects
 Rev_effects_long |>
   ggplot(aes(x=year, y =`est. revenue effect (in billions)`, color = tariff)) +
   geom_line() +
-  labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Est. Revenue Effects of each tariff 2025-2034")
+  labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034")
 ```
 
 Consider here creating another rev effects graph
