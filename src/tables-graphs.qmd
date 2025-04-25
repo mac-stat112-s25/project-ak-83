@@ -42,19 +42,9 @@ What countries GDP has/will been most effected by the tariffs
 
 ```{r}
 Rev_effects_long <-Revenue_effects |>
-  pivot_longer(cols = c(2:12), names_to = "year", values_to = "est. revenue effect (in billions)")
-```
-
-```{r}
-Rev_effects_long <- Rev_effects_long |>
+  pivot_longer(cols = c(2:12), names_to = "year", values_to = "est. revenue effect (in billions)") |>
   mutate(`est. revenue effect (in billions)` = str_sub(`est. revenue effect (in billions)`, 2,10)) |>
-  #mutate(num = str_sub(`est. revenue effect (in billions)`,-1))
-  #separate(`est. revenue effect (in billions)`, c("Sign", "Num"))
-  mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`)) 
-```
-
-```{r}
-Rev_effects_long <- Rev_effects_long |>
+  mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`)) |>
   filter(year != "2025-2034") |>
   mutate(year = as.numeric(year))
 ```
@@ -74,19 +64,20 @@ Consider here creating another rev effects graph
 ```
 
 
-Visualization of GDP decrease of different tariffs
+Visualization of GDP decrease due to different tariffs
 
 ```{r}
 ggplot(est_tariff_impact, aes(x = GDP_dec, fill = tariff)) +
-  geom_histogram()
-# Clean up this graph
+  geom_histogram() +
+  labs(x = "Percent of Estimated GDP Decrease", title = "Estimated GDP Impact of Each Tariff")
 ```
 
 Visualization of Capital Stock decrease of different tariffs
 
 ```{r}
 ggplot(est_tariff_impact, aes(x = Capital_stock_dec, fill = tariff)) +
-  geom_histogram()
+  geom_histogram() +
+  labs(x = "Percent of Estimated Capital Stock Decrease", title = "Estimated Capital Stock Impact of Each Tariff")
 ```
 
 Correlation of GDP and capital stock decrease of different tariffs 
