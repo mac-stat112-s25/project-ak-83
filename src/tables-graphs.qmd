@@ -60,7 +60,12 @@ Rev_effects_long |>
 
 Consider here creating another rev effects graph
 ```{r}
-
+Rev_effects_long |>
+  filter(tariff == "IEEPA Fentanyl/\"Reciprocal\" China") %>%
+  filter(`est. revenue effect (in billions)`==!is.na)
+  ggplot(aes(x=year, y =`est. revenue effect (in billions)`)) +
+  geom_line(color = "orange") +
+  labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034")
 ```
 
 
