@@ -53,6 +53,7 @@ Visualization of Revenue Effects
 
 ```{r}
 Rev_effects_long |>
+  filter(!is.na(`est. revenue effect (in billions)`)) |>
   ggplot(aes(x=year, y =`est. revenue effect (in billions)`, color = tariff)) +
   geom_line() +
   labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034")
@@ -61,8 +62,8 @@ Rev_effects_long |>
 Consider here creating another rev effects graph
 ```{r}
 Rev_effects_long |>
-  filter(tariff == "IEEPA Fentanyl/\"Reciprocal\" China") %>%
-  filter(`est. revenue effect (in billions)`==!is.na)
+  filter(tariff == "IEEPA Fentanyl/\"Reciprocal\" China") |>
+  filter(!is.na(`est. revenue effect (in billions)`)) |>
   ggplot(aes(x=year, y =`est. revenue effect (in billions)`)) +
   geom_line(color = "orange") +
   labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034")
@@ -89,8 +90,8 @@ Correlation of GDP and capital stock decrease of different tariffs
 
 ```{r}
 ggplot(est_tariff_impact, aes(x = GDP_dec, y = Capital_stock_dec, color = tariff)) +
-  geom_point() +
-  labs(x = "Percent GDP decrease", y = "Percent Capital Stock dec.")
+  geom_point(size = 5) +
+  labs(x = "Percent GDP decrease", y = "Percent Capital Stock dec.", title = "Relationship Between Decrease of GDP & Capital Stock Due to Different Tariffs")
 
 # Figure out how to make the points bigger if at all possible
 # Try and reason which tariffs are missing and why that is (if it matters) explain why or why not
