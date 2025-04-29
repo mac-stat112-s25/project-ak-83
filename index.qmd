@@ -11,7 +11,102 @@ Your report will go here.
 # this is a test code
 ```
 
-We will be exploring some different tariffs president Trump has placed on the countries and items and trying to answer the large question: What is the effect of Trump's tariffs on the world and on the country?
+We will be exploring some different tariffs president Trump has placed on the countries and items and trying to answer the large question: What will be the effect of Trump's tariffs on the country?
+
+```{r}
+library(tidyverse)
+library(here)
+Estimated_tariff_impact <- read_csv(here("data","Estimated_Impact_Trump_Tariffs.csv"))
+Revenue_effects <- read_csv(here("data", "Revenue_Effects_Trump_Tariffs.csv"))
+```
+
+```{r}
+est_tariff_impact <- Estimated_tariff_impact |>
+  mutate(tariff = ...1) |>
+  select(tariff, GDP, `Capital Stock`, `Pre-Tax Wages`,`Hours Worked Converted to Full-Time Equivalent Jobs`) |>
+  filter(!is.na(tariff)) |>
+  mutate(GDP = str_sub(GDP,3,5)) |>
+  mutate(GDP = str_replace(GDP, "ss", ".05")) |>
+  mutate(GDP = as.numeric(GDP)) |>
+  mutate(`Capital Stock` = str_sub(`Capital Stock`,3,5)) |>
+  mutate(`Capital Stock` = str_replace(`Capital Stock`,"ss",".05")) |>
+  mutate(`Capital Stock` = as.numeric(`Capital Stock`)) |>
+  mutate("GDP_dec" = GDP) |>
+  mutate("Capital_stock_dec" = `Capital Stock`) |>
+  select(tariff, GDP_dec, Capital_stock_dec)
+head(est_tariff_impact)
+```
+
+Capital Stock: Capital stock refers to the total number of shares that a company is authorized to issue, as outlined in its corporate charter. It represents the maximum amount of shares the company can ever have outstanding (That can be held by investors). 
+
+```{r}
+Revenue_effects <- Revenue_effects |>
+  mutate(tariff = `Conventional Revenue`) |>
+  select(-`Conventional Revenue`) |>
+  relocate(tariff, .before = `2025`) |>
+  filter(!is.na(tariff)) |>
+  filter(tariff != "Dynamic Revenue")
+```
+
+What countries GDP has/will been most effected by the tariffs
+
+```{r}
+Rev_effects_long <-Revenue_effects |>
+  pivot_longer(cols = c(2:12), names_to = "year", values_to = "est. revenue effect (in billions)") |>
+  mutate(`est. revenue effect (in billions)` = str_sub(`est. revenue effect (in billions)`, 2,10)) |>
+  mutate(`est. revenue effect (in billions)` = as.numeric(`est. revenue effect (in billions)`)) |>
+  filter(year != "2025-2034") |>
+  mutate(year = as.numeric(year))
+```
+
+Visualization of Revenue Effects
+
+```{r}
+Rev_effects_long |>
+  filter(!is.na(`est. revenue effect (in billions)`)) |>
+  ggplot(aes(x=year, y =`est. revenue effect (in billions)`, color = tariff)) +
+  geom_line() +
+  labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034")
+```
+
+Consider here creating another rev effects graph
+```{r}
+Rev_effects_long |>
+  filter(tariff == "IEEPA Fentanyl/\"Reciprocal\" China") |>
+  filter(!is.na(`est. revenue effect (in billions)`)) |>
+  ggplot(aes(x=year, y =`est. revenue effect (in billions)`)) +
+  geom_line(color = "orange") +
+  labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034")
+```
+
+
+Visualization of GDP decrease due to different tariffs
+
+```{r}
+ggplot(est_tariff_impact, aes(x = GDP_dec, fill = tariff)) +
+  geom_histogram() +
+  labs(x = "Percent of Estimated GDP Decrease", title = "Estimated GDP Impact of Each Tariff")
+```
+
+Visualization of Capital Stock decrease of different tariffs
+
+```{r}
+ggplot(est_tariff_impact, aes(x = Capital_stock_dec, fill = tariff)) +
+  geom_histogram() +
+  labs(x = "Percent of Estimated Capital Stock Decrease", title = "Estimated Capital Stock Impact of Each Tariff")
+```
+
+Correlation of GDP and capital stock decrease of different tariffs 
+
+```{r}
+ggplot(est_tariff_impact, aes(x = GDP_dec, y = Capital_stock_dec, color = tariff)) +
+  geom_point(size = 5) +
+  labs(x = "Percent GDP decrease", y = "Percent Capital Stock dec.", title = "Relationship Between Decrease of GDP & Capital Stock Due to Different Tariffs")
+
+# Figure out how to make the points bigger if at all possible
+# Try and reason which tariffs are missing and why that is (if it matters) explain why or why not
+```
+
 
 
 
