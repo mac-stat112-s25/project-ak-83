@@ -1,15 +1,20 @@
 ---
 title: "Forecasting The Future Effects Of Recent Tariffs"
 execute: 
-  echo: true      # change to true to show the code
+  echo: false      # change to true to show the code
+  warning: false
+  error: false
 code-fold: false  # change to true to fold the code chunks
 ---
 
-##Research Question
+## Research Question 
+
   We will be exploring some different tariffs president Trump has placed on the countries and items and trying to answer the large question: What will be the effect of Trump's tariffs on the country?
 
-##Tariff Descriptions
-  To begin, we must first and foremost understand the seven tariffs we will be looking at. Some of these tariffs will have **Reciprocal** in their name meaning once these tariffs are placed, the country will likely place equal tariffs on the US. 
+## Tariff Descriptions
+
+  To begin, we must first and foremost understand the seven tariffs we will be looking at. Some of these tariffs will have **Reciprocal** in their name meaning once these tariffs are placed, the country will likely place equal tariffs on the US.
+  
  - IEEPA Fentanyl/"Reciprocal" China: Tariffs imposed on China to attempt to decrease China’s influence on and in America as well as incentivize US manufacturing and consumption of US manufactured goods.
  - Reciprocal Mexico: Tariffs imposed on China to attempt to decrease China’s influence on and in America as well as incentivize US manufacturing and consumption of US manufactured goods.
  - Reciprocal Canada: Tariffs targeting Canadian goods in response to trade imbalances or retaliatory actions, often tied to broader trade disputes.
@@ -18,8 +23,10 @@ code-fold: false  # change to true to fold the code chunks
  - Sec 232 Steel Aluminum: Tariffs justified under Section 232 of the Trade Expansion Act, citing national security concerns related to steel and aluminum imports.
  - Sec 232 Auto: Tariffs on automobile imports under Section 232, citing threats to U.S. auto industry and national security.
 
-##Variables Of Interest
-  There are three primary parts of the economy that we want to look at to figure out the effects of the tariffs. the three variables we will look at are *Gross Domestic Product*, *Capital Stock*, and *Tax Revenue*. Gross domestic product (GDP) refers to the total value  of everything (Goods and services) a country produces in a year. Capital stock is the total number of shares that a company is authorized to issue to its shareholders. Finally, tax revenue is the income collected by governments through taxes.
+## Variables Of Interest 
+
+  There are three primary parts of the economy that we want to look at to figure out the effects of the tariffs. the three variables we will look at are **Gross Domestic Product**, **Capital Stock**, and **Tax Revenue**. Gross domestic product (GDP) refers to the total value  of everything (Goods and services) a country produces in a year. Capital stock is the total number of shares that a company is authorized to issue to its shareholders. Finally, tax revenue is the income collected by governments through taxes.
+  
   Now knowing these variables of interest, we can return back to our research question (What will be the effect of Trump's tariffs on the country?) and create a roadmap of how we will attempt to find an answer. We will try and figure out the affect of each of these tariffs on the variables individually, then we will look at the overall trends that we see when we compare the effect of each on the different variables.
 
 
@@ -44,10 +51,10 @@ est_tariff_impact <- Estimated_tariff_impact |>
   mutate("GDP_dec" = GDP) |>
   mutate("Capital_stock_dec" = `Capital Stock`) |>
   select(tariff, GDP_dec, Capital_stock_dec)
-head(est_tariff_impact)
 ```
 
-##Tariff Impact on Tax Revenue
+## Tariff Impact on Tax Revenue 
+
   The first question we will to answer is how do the different tariffs effect tax revenue?
 
 ```{r}
@@ -69,6 +76,7 @@ Rev_effects_long <-Revenue_effects |>
 ```
 
 Graph Structure:
+
  - X-Axis: Year (2025-2034)
  - Y-Axis: Estimated revenue effect (in billions)
  - Fill-Color grouping: Each tariff 
@@ -78,31 +86,32 @@ Rev_effects_long |>
   filter(!is.na(`est. revenue effect (in billions)`)) |>
   ggplot(aes(x=year, y =`est. revenue effect (in billions)`, color = tariff)) +
   geom_line() +
-  labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034")
+  labs(x = "Year", y = "Estimated Revenue effect (in billions)", title = "Estimated Revenue Effects of Each Tariff 2025-2034") +
+  theme(legend.position = "bottom", legend.box = "vertical")
 ```
 
-Main predictors:
+## Main predictors:
+
  - Total conventional revenue (purple) shows the simple sum of expected revenues assuming the economy works perfectly. We see this revenue rising over time due to general increase of imports, which in turn increases revenue. 
-
  - Total dynamic revenue (pink) shows the total revenue including retaliation effects (countries retaliating with tariffs of their own) and behavioral changes within the economy. This is a more realistic version of conventional revenue and more likely shows the effects the tariffs will have over this time period. When we look at this line compared to the conventional revenue line, not only is it substantially lower but it's slope is also smaller as well. These two things tell us that the actual tax revenue that we expect to gain from these tariffs are lower because of country retaliation and it also won't increase at a rapid rate.
-
  - Dynamic revenue with threatened and Imposed retaliation (orange): 
 Shows the total revenue due to only retaliation. When other countries retaliate, exports drop and tax is increased resulting in less predicted revenue and lower trade in general. 
-
  - Zig-zag patterns: 
 We assume these zig-zag patterns that we see lower on the graph for the individual tariffs are likely due to seasonal or yearly cycles. Tax revenue resetting to 0 after every year and then continuing to increase as the year goes on. Economies also don’t grow in straight lines, there are always year to year day to day fluctuations.
-
  - Steep rise near 2032: 
 We predict this steep rise near 2032 could be due to a predicted new policies or the expiration of current tariffs. The expiration of current tariffs could cause the end of retaliation which would cause an upward surge of estimated revenue. It's also possible that likely new policies will be put in place around this time that will have a large increasing effect on US tax revenue.
 
 
-*How will tariffs impact tax revenue?* 
+**How will tariffs impact tax revenue?** 
+
 We expect the tariffs to, overall, cause a steady increase of tax revenue over the coming years. In the very immediate future we do not expect to see any type of surge in any direction (barring any type of recession, war, natural disaster, or economy shifting technological advancement) until the early mid 2030s when either the tariffs will expire (possibly new ones replacing them) or new policies will be put in place effecting tax revenue. 
 
-##Tariff Impact of GDP
+## Tariff Impact of GDP
+
 Now that we have looked at how the tariffs will effect tax revenue, let us now explore how it will effect one of the biggest indicators of a country's economic success, GDP.
 
 Graph Structure:
+
  - X-Axis: Percent of estimated GDP decrease
  - Y-Axis: Count
  - Fill-Color grouping: Each tariff 
@@ -110,13 +119,15 @@ Graph Structure:
 ```{r}
 ggplot(est_tariff_impact, aes(x = GDP_dec, fill = tariff)) +
   geom_histogram() +
-  labs(x = "Percent of Estimated GDP Decrease", title = "Estimated GDP Impact of Each Tariff")
+  labs(x = "Percent of Estimated GDP Decrease", title = "Estimated GDP Impact of Each Tariff") 
 ```
 
-*How will the tariffs impact GDP*
+**How will the tariffs impact GDP?**
+
   This illustration shows that overall the tariffs will decrease GDP by 0.8%. "Reciprocal" China is the single largest contributor, causing a ~0.35% GDP decrease. This is to be expected because of how intertwined our, and China's economies are. We a large amount of goods from there and use those goods in our business. These tariffs will make the purchase and trade of these goods more expensive and thus decrease production of businesses that rely on Chinese goods or force them to pay more (likely by way of consumers paying higher prices) to continue production at there current rate. Tariffs like Sec 232 Auto, ROW, and Steel/Aluminum have moderate impacts (0.1–0.25% GDP loss). These are still impactful and the logic is similar to why China has such an effect but just to a smaller scale. Reciprocal Tariffs against the EU, Mexico, Canada, <0.05% impact and won't have much of an effect on our GDP as a whole. Again, as shown by the pink, “total imposed US tariffs” indicate the tariffs effect on GDP together will be decrease by “0.8%.” This indicates significant economic costs when retaliation and cross sector effects combine. (this results in a net loss of 216 billion dollars)
 
-##Tariff Impact of Capital Stock
+## Tariff Impact of Capital Stock
+
 Now we will explore our final economic indicator, capital stock, and see the impact tariffs will have on it.
 
 ```{r}
@@ -125,15 +136,12 @@ ggplot(est_tariff_impact, aes(x = Capital_stock_dec, fill = tariff)) +
   labs(x = "Percent of Estimated Capital Stock Decrease", title = "Estimated Capital Stock Impact of Each Tariff")
 ```
 
-Correlation of GDP and capital stock decrease of different tariffs 
+## Correlation of GDP and capital stock decrease of different tariffs 
 
 ```{r}
 ggplot(est_tariff_impact, aes(x = GDP_dec, y = Capital_stock_dec, color = tariff)) +
   geom_point(size = 5) +
-  labs(x = "Percent GDP decrease", y = "Percent Capital Stock dec.", title = "Relationship Between Decrease of GDP & Capital Stock Due to Different Tariffs")
-
-# Figure out how to make the points bigger if at all possible
-# Try and reason which tariffs are missing and why that is (if it matters) explain why or why not
+  labs(x = "Percent GDP Decrease", y = "Percent Capital Stock Decrease", title = "Relationship Between Decrease of GDP & Capital Stock Due to Different Tariffs") 
 ```
 
 

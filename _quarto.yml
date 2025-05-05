@@ -11,8 +11,8 @@ project:
 
 
 book:
-  title: "project title"
-  author: ["student 1 first and last name", "student 2 first and last name", "student 3 first and last name"]
+  title: "USA 2025 Tarrifs: An Exploration on the Econominc Effects of Trump's Imposed Tarrifs on the Rest of the World"
+  author: ["Ataa-Adjetey Mensah", "Kellen Sedlmayer", "Daniel Powell"]
   date: today  # use today to update date published based on last time project was edited
   date-format: full
   # favicon: images/logo.png
@@ -41,13 +41,9 @@ book:
   appendices:
   - src/appx/proposal.qmd
   - src/appx/case-study.qmd
-<<<<<<< Updated upstream
-  - src/appx/et/Ataa-M.qmd
-  - src/appx/et/kellen-s.qmd
-=======
-  - src/appx/Ataa_M.qmd
-  - src/appx/Sedlmayer_K.qmd
->>>>>>> Stashed changes
+  - src/et/Ataa-M.qmd
+  - src/et/Kellen-S.qmd
+  - src/appx/EDA/Ataa_eda.qmd
 
 
 
