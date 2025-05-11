@@ -2,4 +2,14 @@
 title: "Case Study"
 ---
 
-Your case study will go here.
+Report Studied: Six Charts To Help Americans Understand The Upcoming German Election
+
+Published by FiveThirtyEight
+
+What we liked: The formatting.
+We liked how the article sets up every chart with background to help the reader understand the charts.
+The accessibility of the charts.
+The visualizations use colors that are easy to understand, as well as adding labels everywhere.
+
+What we didn't like: The bar graphs with the circles.
+The graphs are hard to understand with the amount of information present in the visualization.
