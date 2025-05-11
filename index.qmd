@@ -90,7 +90,7 @@ Rev_effects_long |>
   # theme(legend.position = "bottom", legend.box = "vertical")
 ```
 
-## Main predictors:
+**Main predictors:**
 
  - Total conventional revenue (purple) shows the simple sum of expected revenues assuming the economy works perfectly. We see this revenue rising over time due to general increase of imports, which in turn increases revenue. 
  - Total dynamic revenue (pink) shows the total revenue including retaliation effects (countries retaliating with tariffs of their own) and behavioral changes within the economy. This is a more realistic version of conventional revenue and more likely shows the effects the tariffs will have over this time period. When we look at this line compared to the conventional revenue line, not only is it substantially lower but it's slope is also smaller as well. These two things tell us that the actual tax revenue that we expect to gain from these tariffs are lower because of country retaliation and it also won't increase at a rapid rate.
@@ -168,21 +168,12 @@ ggplot(est_tariff_impact, aes(x = GDP_dec, y = Capital_stock_dec, color = tariff
   
   Although we expect to see these trends due to the tariffs, tariffs are not the only thing that effect tax revenue, GDP, capital stock, and the US as a whole. Many factors go into these things and will effect whether they increase or decrease. Things such as consumer consumption, investment, technological development, global crisis's and much more. The issue we find now trying to look at the bigger picture is the high amount of estimation and confounding variables. There is already a level of error we may see in our data because we are estimating and do not know for sure if this is exactly what will happen. When we estimate for more variables, the chance for error increases and the likely-hood of our overall evaluation being accurate decreases. Too, in adding more variables, we unknowingly may add confounding variables that may affect our data/trends. As a result, we may see certain effects (right or wrong) but be unable to pinpoint why we expect to see these things.  
   
+## Video & Presentation:
+
+{{< video https://youtu.be/JUPJaqpVh_s >}}
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRJm6H14Z2J64b_RpIJFPeKt8phQMwETpk1uHVoGGf4b-5Ycrq8iMJv7MTqNlpYGHc_IZpH8mRUBdI2/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
 ## Data Source: 
 
 https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/ 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

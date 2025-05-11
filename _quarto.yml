@@ -43,7 +43,7 @@ book:
   - src/appx/case-study.qmd
   - src/et/Ataa-M.qmd
   - src/et/Kellen-S.qmd
-  - src/appx/EDA/Ataa_eda.qmd
+  - src/eda/Ataa_eda.qmd
 
 
 
